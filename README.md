@@ -109,15 +109,3 @@ project-approval-portal/
 
 ---
 
-## 💰 Cost Estimation
-- MongoDB Atlas: Free tier for small-scale usage
-- Node.js + Express + JWT: Open-source
-- Local development in VS Code
-
----
-
-## ✅ Interview Value
-This project:
-- Proves your Node.js + MongoDB knowledge
-- Demonstrates understanding of real-world architecture
-- Covers clean code practices (MVC, JWT, RBAC)
