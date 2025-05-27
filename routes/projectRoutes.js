@@ -13,6 +13,10 @@ router.post('/', roleMiddleware(['employee', 'manager', 'admin']), projectContro
 // Get all project requests (Manager, Admin)
 router.get('/', roleMiddleware(['manager', 'admin']), projectController.getAllRequests);
 
+// Get current user's project requests (Employee)
+router.get('/me', roleMiddleware(['employee', 'manager', 'admin']), projectController.getMyRequests);
+
+
 // Approve request (Manager, Admin)
 router.put('/:id/approve', roleMiddleware(['manager', 'admin']), projectController.approveRequest);
 

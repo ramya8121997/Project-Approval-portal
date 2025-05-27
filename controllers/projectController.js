@@ -11,8 +11,10 @@ exports.submitRequest = async (req, res) => {
       submittedBy: req.user.id,  // From auth middleware
     });
     await newRequest.save();
+    console.log('New project request submitted:', newRequest);
     res.status(201).json({ message: 'Project request submitted', request: newRequest });
   } catch (error) {
+    console.error('Error submitting project request:', error);
     res.status(500).json({ error: 'Server error' });
   }
 };
@@ -22,6 +24,18 @@ exports.getAllRequests = async (req, res) => {
   try {
     const requests = await ProjectRequest.find().populate('submittedBy', 'name email');
     res.status(200).json(requests);
+  } catch (error) {
+    res.status(500).json({ error: 'Server error' });
+  }
+};
+
+
+// Get requests submitted by current user (employee)
+exports.getMyRequests = async (req, res) => {
+  try {
+    // Populate submittedBy to get user name and email info
+    const requests = await ProjectRequest.find({ submittedBy: req.user.id }).populate('submittedBy', 'name email');
+    res.status(200).json({ data: requests });
   } catch (error) {
     res.status(500).json({ error: 'Server error' });
   }
