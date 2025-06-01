@@ -72,3 +72,16 @@ exports.rejectRequest = async (req, res) => {
     res.status(500).json({ error: 'Server error' });
   }
 };
+
+exports.getStatistics = async (req, res) => {
+  try {
+    const totalRequests = await ProjectRequest.countDocuments();
+    const approved = await ProjectRequest.countDocuments({ status: 'approved' });
+    const rejected = await ProjectRequest.countDocuments({ status: 'rejected' });
+    const pending = await ProjectRequest.countDocuments({ status: 'pending' });
+
+    res.status(200).json({ totalRequests, approved, rejected, pending });
+  } catch (error) {
+    res.status(500).json({ error: 'Server error' });
+  }
+};

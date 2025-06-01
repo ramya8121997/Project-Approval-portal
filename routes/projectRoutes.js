@@ -23,4 +23,7 @@ router.put('/:id/approve', roleMiddleware(['manager', 'admin']), projectControll
 // Reject request (Manager, Admin)
 router.put('/:id/reject', roleMiddleware(['manager', 'admin']), projectController.rejectRequest);
 
+router.get('/stats', roleMiddleware(['admin']), projectController.getStatistics);
+
+
 module.exports = router;
